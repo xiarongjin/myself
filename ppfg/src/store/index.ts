@@ -1,8 +1,19 @@
+import { team } from '@/utils/data'
 import { defineStore } from 'pinia'
-
+export type Record = {
+  team1: number // team1 id
+  team2: number // team2 id
+  match: number // 第几场
+  point: number // 第几分
+  memberId: number // 队员
+  niceD: number
+  catch: number
+  assist: number
+  fault: number
+}
 export const useCounter = defineStore('counter', {
   state: () => ({
-    counter: 0
+    counter: 1
   }),
   actions: {
     increment() {
@@ -13,6 +24,11 @@ export const useCounter = defineStore('counter', {
     }
   }
 })
+export const useMatch = defineStore('match', {
+  state: () => ({
+    match: 1
+  })
+})
 
 export const useTeamTop = defineStore('teamTop', {
   // other options...
@@ -20,6 +36,11 @@ export const useTeamTop = defineStore('teamTop', {
     team: '',
     members: [] as number[]
   }),
+  getters: {
+    teams(state) {
+      return team.filter((item) => item.name == state.team)[0]
+    }
+  },
   actions: {
     setTeam(item: string) {
       this.team = item
@@ -34,8 +55,14 @@ export const useTeamBottom = defineStore('teamBottom', {
   // other options...
   state: () => ({
     team: '',
+    id: Number,
     members: [] as number[]
   }),
+  getters: {
+    teams(state) {
+      return team.filter((item) => item.name == state.team)[0]
+    }
+  },
   actions: {
     setTeam(item: string) {
       this.team = item

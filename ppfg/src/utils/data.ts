@@ -10,17 +10,7 @@ export type Team = {
   name: string
   numbers: Member[]
 }
-export type Record = {
-  id: number // 自增
-  team1: number // team1 id
-  team2: number // team2 id
-  match: number // 第几场
-  point: number // 第几分
-  memberId: number // 队员
-  niceD: boolean
-  catch: boolean
-  assist: boolean
-}
+
 export const allMembers = [
   { id: 1, name: 'rj0', back: 0, tag: '' },
   { id: 2, name: 'rj1', back: 1, tag: '' },

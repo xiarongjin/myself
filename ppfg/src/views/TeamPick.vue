@@ -2,7 +2,7 @@
 import { useRouter } from 'vue-router'
 import { computed } from 'vue'
 import { team } from '../utils/data'
-import { useTeamBottom, useTeamTop } from '@/store'
+import { useMatch, useTeamBottom, useTeamTop } from '@/store'
 import { storeToRefs } from 'pinia'
 const router = useRouter()
 
@@ -32,15 +32,57 @@ const submit = () => {
     name: 'up'
   })
 }
+const { match } = useMatch()
+const options = [
+  {
+    label: '第一场',
+    value: 1
+  },
+  {
+    label: '第二场',
+    value: 2
+  },
+  {
+    label: '第三场',
+    value: 3
+  },
+  {
+    label: '第一场',
+    value: 4
+  },
+  {
+    label: '排位赛第一场',
+    value: 5
+  },
+  {
+    label: '排位赛第二场',
+    value: 6
+  }
+]
 </script>
 
 <template>
   <div class="common-layout">
     <el-container>
       <el-header
-        class="bg-[#409eff] text-white font-medium text-2xl flex items-center justify-center"
-        >Pick</el-header
+        class="bg-[#409eff] relative text-white font-medium text-2xl flex items-center justify-center"
       >
+        <div>Pick</div>
+
+        <div class="absolute text-sm top-0 left-0 h-full flex items-center">
+          <div>
+            当前场次:
+            <el-select v-model="match" filterable placeholder="Select">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              />
+            </el-select>
+          </div>
+        </div>
+      </el-header>
       <div class="p-5">
         <el-radio-group class="w-full" v-model="teamTop" size="large">
           <el-radio-button
@@ -54,7 +96,6 @@ const submit = () => {
           <template #header>
             <div class="card-header flex justify-between">
               <span>{{ teamTop ? teamTop : '请选择队伍' }}</span>
-              <el-button class="button" type="primary">确认</el-button>
             </div>
           </template>
           <el-checkbox-group
@@ -91,7 +132,6 @@ const submit = () => {
           <template #header>
             <div class="card-header flex justify-between">
               <span>{{ teamBottom ? teamBottom : '请选择队伍' }}</span>
-              <el-button class="button" type="primary">确认</el-button>
             </div>
           </template>
           <el-checkbox-group
