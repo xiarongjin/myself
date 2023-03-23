@@ -1,4 +1,4 @@
-const baseURL = 'http://127.0.0.1:3839'
+const baseURL = 'http://webxrj.top:3839'
 import type { Record } from '@/store'
 export async function postData(url = '', data = {}) {
   // Default options are marked with *
