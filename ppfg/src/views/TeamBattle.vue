@@ -82,24 +82,23 @@ const closePopup = () => {
   if (popupDataStash.value?.memberId) {
     matchData.value[popupDataStash.value?.memberId] = popupDataStash.value
   }
-
-  if (popupDataStash.value.catch1 > 0) {
-    let isTop = false
-    teamTopMembers.map((el) => {
-      if (el.id == popupDataStash.value?.memberId) {
-        isTop = true
-      }
-    })
-    if (isTop) {
-      history.team1Add()
-    } else {
-      history.team2Add()
-    }
-  }
 }
 const nextPart = async () => {
   try {
     for (let i in matchData.value) {
+      if (matchData.value[i].catch1 > 0) {
+        let isTop = false
+        teamTopMembers.map((el) => {
+          if (el.id == matchData.value[i].memberId) {
+            isTop = true
+          }
+        })
+        if (isTop) {
+          history.team1Add()
+        } else {
+          history.team2Add()
+        }
+      }
       await postRecord(matchData.value[i])
     }
   } catch (error) {
