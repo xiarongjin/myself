@@ -69,9 +69,9 @@ onMounted(() => {})
         class="bg-[#409eff] relative text-white font-medium text-2xl flex items-center justify-center"
       >
         <div>Pick</div>
-        <!-- <div class="absolute top-0 left-0 h-full flex items-center">
-          <router-link to="/"> <el-button type="warning"> 返回首页 </el-button></router-link>
-        </div> -->
+        <div class="absolute top-0 right-0 h-full flex items-center">
+          <router-link to="/admin"> <el-button type="warning"> 管理入口 </el-button></router-link>
+        </div>
       </el-header>
       <div class="p-5 relative">
         <div class="text-sm mb-5 h-full flex items-center">

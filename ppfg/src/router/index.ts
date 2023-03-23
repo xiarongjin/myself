@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import TeamPick from '../views/TeamPick.vue'
 import AddMember from '../views/AddMember.vue'
+import AdminPage from '../admin/AdminPage.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -10,7 +11,11 @@ const router = createRouter({
       name: 'home',
       component: HomeView
     },
-
+    {
+      path: '/admin',
+      name: 'admin',
+      component: AdminPage
+    },
     {
       path: '/pick',
       name: 'pick',
