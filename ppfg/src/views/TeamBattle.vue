@@ -16,9 +16,14 @@ const { teams: teamBottom, members: bottomMembers } = teamBottomStore
 
 const teamBottomMembers = allMembers.filter((item) => bottomMembers?.includes(item?.id))
 const teamTopMembers = allMembers.filter((item) => topMembers?.includes(item?.id))
+const canBack = ref(true)
 const goBack = () => {
-  router.back()
-  counterStore.sub()
+  if (canBack.value) {
+    router.back()
+    counterStore.sub()
+  } else {
+    alert('已进行操作无法重选择～')
+  }
 }
 const history = useHistory()
 const { team1Points, team2Points } = storeToRefs(history)
@@ -62,6 +67,7 @@ const initPopupData = (id: number) => {
 }
 
 const openPopup = (o: Member) => {
+  canBack.value = false
   showPopup.value = true
   popStash.value = o
   if (matchData.value?.[o.id]) {
