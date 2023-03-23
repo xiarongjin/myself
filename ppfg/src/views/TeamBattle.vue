@@ -5,6 +5,7 @@ import router from '@/router'
 import { ref } from 'vue'
 import MemberCard from '@/components/MemberCard.vue'
 import { storeToRefs } from 'pinia'
+import { postRecord } from '@/utils/api'
 const counterStore = useCounter()
 const { counter } = counterStore
 counterStore.increment()
@@ -41,7 +42,7 @@ let popupDataStash = ref<Record>({
   point: counter, // 第几分
   memberId: 0, // 队员
   niceD: 0,
-  catch: 0,
+  catch1: 0,
   assist: 0,
   fault: 0
 })
@@ -54,7 +55,7 @@ const initPopupData = (id: number) => {
     point: counter, // 第几分
     memberId: id, // 队员
     niceD: 0,
-    catch: 0,
+    catch1: 0,
     assist: 0,
     fault: 0
   }
@@ -76,7 +77,7 @@ const closePopup = () => {
     matchData.value[popupDataStash.value?.memberId] = popupDataStash.value
   }
 
-  if (popupDataStash.value.catch > 0) {
+  if (popupDataStash.value.catch1 > 0) {
     let isTop = false
     teamTopMembers.map((el) => {
       if (el.id == popupDataStash.value?.memberId) {
@@ -90,7 +91,14 @@ const closePopup = () => {
     }
   }
 }
-const nextPart = () => {
+const nextPart = async () => {
+  try {
+    for (let i in matchData.value) {
+      await postRecord(matchData.value[i])
+    }
+  } catch (error) {
+    console.log(error)
+  }
   router.back()
 }
 </script>
@@ -118,7 +126,7 @@ const nextPart = () => {
               :back="o.back"
               :name="o.name"
               :nice-d="matchData[o.id]?.niceD"
-              :catch="matchData[o.id]?.catch"
+              :catch="matchData[o.id]?.catch1"
               :assist="matchData[o.id]?.assist"
               :fault="matchData[o.id]?.fault"
             />
@@ -135,7 +143,7 @@ const nextPart = () => {
               :back="o.back"
               :name="o.name"
               :nice-d="matchData[o.id]?.niceD"
-              :catch="matchData[o.id]?.catch"
+              :catch="matchData[o.id]?.catch1"
               :assist="matchData[o.id]?.assist"
               :fault="matchData[o.id]?.fault"
             />
@@ -166,7 +174,7 @@ const nextPart = () => {
         <el-input-number v-model="popupDataStash.assist" :min="0" :max="10" />
       </el-form-item>
       <el-form-item label="得分">
-        <el-input-number v-model="popupDataStash.catch" :min="0" :max="10" />
+        <el-input-number v-model="popupDataStash.catch1" :min="0" :max="10" />
       </el-form-item>
       <el-form-item label="niceD">
         <el-input-number v-model="popupDataStash.niceD" :min="0" :max="10" />

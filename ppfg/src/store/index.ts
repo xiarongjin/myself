@@ -7,7 +7,7 @@ export type Record = {
   point: number // 第几分
   memberId: number // 队员
   niceD: number
-  catch: number
+  catch1: number
   assist: number
   fault: number
 }

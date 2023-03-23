@@ -134,7 +134,7 @@ router.get("/members/search", function (req, res) {
 router.post("/records/insert", function (req, res) {
   const { team1, catch1, team2, match, point, memberId, niceD, assist, fault } =
     req.body;
-  const sql = `insert into records(team1,team2,match,point,memberId,niceD,catch1,assist,fault) values ('${team1}','${team2}','${match}','${point}','${memberId}','${niceD}','${catch1}','${assist}','${fault}')`;
+  const sql = `insert into records(team1,team2,\`match\`,\`point\`,memberId,niceD,catch1,assist,fault) values ('${team1}','${team2}','${match}','${point}','${memberId}','${niceD}','${catch1}','${assist}','${fault}')`;
   conDb(sql, function (error, data) {
     if (error) {
       console.log(error);

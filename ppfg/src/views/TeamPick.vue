@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { team } from '../utils/data'
 import { useCounter, useHistory, useMatch, useTeamBottom, useTeamTop } from '@/store'
 import { storeToRefs } from 'pinia'
@@ -58,6 +58,8 @@ const options = [
     value: 6
   }
 ]
+
+onMounted(() => {})
 </script>
 
 <template>
