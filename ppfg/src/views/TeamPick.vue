@@ -2,12 +2,15 @@
 import { useRouter } from 'vue-router'
 import { computed } from 'vue'
 import { team } from '../utils/data'
-import { useMatch, useTeamBottom, useTeamTop } from '@/store'
+import { useCounter, useHistory, useMatch, useTeamBottom, useTeamTop } from '@/store'
 import { storeToRefs } from 'pinia'
 const router = useRouter()
-
+const counterStore = useCounter()
+const { counter } = counterStore
 const teamTopStore = useTeamTop()
 const teamBottomStore = useTeamBottom()
+const history = useHistory()
+const { team1Points, team2Points } = storeToRefs(history)
 
 const { team: teamTop, members: checkboxGroupTop } = storeToRefs(teamTopStore)
 const teamTopMembers = computed(() => {
@@ -32,7 +35,7 @@ const submit = () => {
     name: 'up'
   })
 }
-const { match } = useMatch()
+const { match } = storeToRefs(useMatch())
 const options = [
   {
     label: '第一场',
@@ -45,10 +48,6 @@ const options = [
   {
     label: '第三场',
     value: 3
-  },
-  {
-    label: '第一场',
-    value: 4
   },
   {
     label: '排位赛第一场',
@@ -68,11 +67,15 @@ const options = [
         class="bg-[#409eff] relative text-white font-medium text-2xl flex items-center justify-center"
       >
         <div>Pick</div>
-
-        <div class="absolute text-sm top-0 left-0 h-full flex items-center">
+        <!-- <div class="absolute top-0 left-0 h-full flex items-center">
+          <router-link to="/"> <el-button type="warning"> 返回首页 </el-button></router-link>
+        </div> -->
+      </el-header>
+      <div class="p-5 relative">
+        <div class="text-sm mb-5 h-full flex items-center">
           <div>
             当前场次:
-            <el-select v-model="match" filterable placeholder="Select">
+            <el-select v-model="match" size="small" filterable placeholder="Select">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -81,9 +84,8 @@ const options = [
               />
             </el-select>
           </div>
+          <div class="pl-5">第{{ counter }}分 {{ team1Points + ':' + team2Points }}</div>
         </div>
-      </el-header>
-      <div class="p-5">
         <el-radio-group class="w-full" v-model="teamTop" size="large">
           <el-radio-button
             v-for="item in team"

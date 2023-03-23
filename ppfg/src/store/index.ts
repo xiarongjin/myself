@@ -11,6 +11,22 @@ export type Record = {
   assist: number
   fault: number
 }
+
+export const useHistory = defineStore('history', {
+  state: () => ({
+    team1Points: 0,
+    team2Points: 0
+  }),
+  actions: {
+    team1Add() {
+      this.team1Points++
+    },
+    team2Add() {
+      this.team2Points++
+    }
+  }
+})
+
 export const useCounter = defineStore('counter', {
   state: () => ({
     counter: 1
