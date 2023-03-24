@@ -10,7 +10,7 @@ name、captain、tag
 
 // members
 id
-name、backNum、tag
+name、backNum、tag、teamId
 
 // records
 id

@@ -78,8 +78,8 @@ router.get("/teams/search", function (req, res) {
 
 // 录入会员数据
 router.post("/members/insert", function (req, res) {
-  const { name, backNum, tag } = req.body;
-  const sql = `insert into members(name,backNum,tag) values ('${name}','${backNum}','${tag}')`;
+  const { name, backNum, tag, teamId } = req.body;
+  const sql = `insert into members(name,backNum,tag,teamId) values ('${name}','${backNum}','${tag}','${teamId}')`;
   conDb(sql, function (error, data) {
     if (error) {
       console.log(error);
@@ -95,8 +95,8 @@ router.post("/members/insert", function (req, res) {
 
 // 更新会员数据
 router.post("/members/update", function (req, res) {
-  const { id, name, backNum, tag } = req.body;
-  const sql = `Update members set name='${name}',backNum='${backNum}',tag='${tag}' where id=${id}`;
+  const { id, name, backNum, tag, teamId } = req.body;
+  const sql = `Update members set name='${name}',backNum='${backNum}',tag='${tag}',teamId='${teamId}' where id=${id}`;
   conDb(sql, function (error, data) {
     if (error) {
       console.log(error);

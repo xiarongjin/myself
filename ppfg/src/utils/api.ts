@@ -1,4 +1,4 @@
-const baseURL = 'http://webxrj.top:3839'
+const baseURL = import.meta.env.DEV ? 'http://localhost:3839' : 'http://webxrj.top:3839'
 import type { Record } from '@/store'
 export async function postData(url = '', data = {}) {
   // Default options are marked with *
