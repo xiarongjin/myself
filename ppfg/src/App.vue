@@ -1,6 +1,8 @@
 <script setup lang="ts">
 // import { ref } from 'vue'
 
+import { onMounted } from 'vue'
+
 // const activeIndex = ref('home')
 // const handleSelect = (key: string, keyPath: string[]) => {
 //   console.log(key, keyPath)

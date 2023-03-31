@@ -4,6 +4,7 @@ import { computed, onMounted } from 'vue'
 import { team } from '../utils/data'
 import { useCounter, useHistory, useMatch, useTeamBottom, useTeamTop } from '@/store'
 import { storeToRefs } from 'pinia'
+import { getWeather } from '@/utils/api'
 const router = useRouter()
 const counterStore = useCounter()
 const { counter } = counterStore
@@ -59,7 +60,10 @@ const options = [
   }
 ]
 
-onMounted(() => {})
+onMounted(async () => {
+  const res = await getWeather()
+  console.log(res)
+})
 </script>
 
 <template>

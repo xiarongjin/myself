@@ -4,6 +4,7 @@ const fetch = require("node-fetch");
 const fs = require("fs");
 //链接数据库
 var mysql = require("mysql");
+const { stringify } = require("querystring");
 
 var connection = mysql.createConnection({
   host: "webxrj.top",
@@ -173,4 +174,26 @@ router.get("/records/search", function (req, res) {
   });
 });
 
+const getWeather = async () => {
+  const req = await fetch(
+    "https://api.map.baidu.com/api_region_search/v1/?keyword=上海市&sub_admin=0&ak=KHIxIqd7ZkV4qRRCSWTFw7v2lfNKzBmb&extensions_code=1",
+    {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      // body: JSON.stringify(data),
+    }
+  );
+  return req.json();
+};
+
+router.post("/getWeather", async (req, res) => {
+  console.log(req.body);
+  // const data = await getWeather();
+  console.log(await getWeather());
+  const data = await getWeather();
+  res.send(data);
+});
 module.exports = router;

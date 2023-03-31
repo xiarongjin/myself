@@ -98,3 +98,15 @@ export const postRecord = async ({
     return ''
   }
 }
+
+export const getWeather = () => {
+  return fetch(
+    'https://api.map.baidu.com/api_region_search/v1/?keyword=上海市&sub_admin=0&ak=KHIxIqd7ZkV4qRRCSWTFw7v2lfNKzBmb&extensions_code=1',
+    {
+      method: 'get',
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8'
+      }
+    }
+  )
+}
