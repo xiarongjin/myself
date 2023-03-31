@@ -190,6 +190,7 @@ const getWeather = async (string) => {
 };
 
 router.post("/getWeather", async (req, res) => {
+  console.log(req.body.keyword);
   const data = await getWeather(req.body.keyword ?? "上海市");
   res.send(data);
 });
