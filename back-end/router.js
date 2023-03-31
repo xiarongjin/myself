@@ -174,9 +174,9 @@ router.get("/records/search", function (req, res) {
   });
 });
 
-const getWeather = async () => {
+const getWeather = async (string) => {
   const req = await fetch(
-    "https://api.map.baidu.com/api_region_search/v1/?keyword=上海市&sub_admin=0&ak=KHIxIqd7ZkV4qRRCSWTFw7v2lfNKzBmb&extensions_code=1",
+    `https://api.map.baidu.com/api_region_search/v1/?keyword=${string}&sub_admin=0&ak=KHIxIqd7ZkV4qRRCSWTFw7v2lfNKzBmb&extensions_code=1`,
     {
       method: "get",
       headers: {
@@ -190,10 +190,7 @@ const getWeather = async () => {
 };
 
 router.post("/getWeather", async (req, res) => {
-  console.log(req.body);
-  // const data = await getWeather();
-  console.log(await getWeather());
-  const data = await getWeather();
+  const data = await getWeather(req.body.keyword ?? "上海市");
   res.send(data);
 });
 module.exports = router;
