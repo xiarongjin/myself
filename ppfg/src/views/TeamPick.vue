@@ -59,11 +59,6 @@ const options = [
     value: 6
   }
 ]
-
-onMounted(async () => {
-  const res = await getWeather()
-  console.log(res)
-})
 </script>
 
 <template>
