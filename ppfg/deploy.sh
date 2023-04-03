@@ -1,3 +1,1 @@
-git pull
-yarn 
-yarn build
+git pull&&yarn&&yarn build
